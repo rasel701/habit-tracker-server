@@ -18,6 +18,12 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     await client.connect();
+    const db = client.db("habit-tracker-db");
+    const habitCollection = db.collection("habit-info");
+
+    app.get("/habit-info", (req, res) => {
+      res.send("habit-information");
+    });
 
     await client.db("admin").command({ ping: 1 });
     console.log(
